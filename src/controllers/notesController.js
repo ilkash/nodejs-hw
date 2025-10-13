@@ -1,8 +1,6 @@
 import { Note } from '../models/note.js';
 import createHttpError from 'http-errors';
 
-// Отримати список усіх студентів
-
 export const getAllNotes = async (req, res) => {
   const notes = await Note.find();
   res.status(200).json(notes);
@@ -12,7 +10,7 @@ export const getNoteById = async (req, res) => {
   const { noteId } = req.params;
   const note = await Note.findById(noteId);
   if (!note) {
-    throw createHttpError(404, 'Note is not faund');
+    throw createHttpError(404, 'Note is not found');
   }
   res.status(200).json(note);
 };
@@ -28,7 +26,7 @@ export const deleteNote = async (req, res) => {
     _id: noteId,
   });
   if (!note) {
-    throw createHttpError(404, 'Note is not faund');
+    throw createHttpError(404, 'Note is not found');
   }
   res.status(200).json(note);
 };
@@ -40,8 +38,8 @@ export const updateNote = async (req, res, next) => {
     new: true,
   });
 
-  if (!noteId) {
-    next(createHttpError(404, 'Student not found'));
+  if (!note) {
+    next(createHttpError(404, 'Note is  not found'));
     return;
   }
 
