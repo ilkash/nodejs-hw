@@ -4,7 +4,7 @@ import { isValidObjectId } from 'mongoose';
 export const createNoteSchema = {
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(1).required(),
-    content: Joi.string(),
+    content: Joi.string().allow(''),
     tag: Joi.string().valid(
       'Work',
       'Personal',
@@ -36,7 +36,7 @@ export const updateNoteSchema = {
   }),
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(1),
-    content: Joi.string(),
+    content: Joi.string().allow(''),
     tag: Joi.string().valid(
       'Work',
       'Personal',
@@ -56,5 +56,18 @@ export const getAllNotesSchema = {
   [Segments.QUERY]: Joi.object({
     page: Joi.number().integer().min(1).default(1),
     perPage: Joi.number().integer().min(5).max(20).default(10),
+    tag: Joi.string().valid(
+      'Work',
+      'Personal',
+      'Meeting',
+      'Shopping',
+      'Ideas',
+      'Travel',
+      'Finance',
+      'Health',
+      'Important',
+      'Todo',
+    ),
+    search: Joi.string().trim().allow(''),
   }),
 };
