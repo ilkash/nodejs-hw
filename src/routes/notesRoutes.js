@@ -11,9 +11,10 @@ import {
   createNoteSchema,
   noteIdSchema,
   updateNoteSchema,
+  getAllNotesSchema,
 } from '../validations/notesValidation.js';
 const router = Router();
-router.get('/notes', getAllNotes);
+router.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
 
 router.get('/notes/:noteId', celebrate(noteIdSchema), getNoteById);
 
