@@ -9,7 +9,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 import { logger } from './middleware/logger.js';
 import notesRouters from './routes/notesRoutes.js';
 import { errors } from 'celebrate';
-import authRoutes from './routes/authRoutes.js';
+import authRouters from './routes/authRoutes.js';
 import cookieParser from 'cookie-parser';
 const app = express();
 const PORT = process.env.PORT ?? 3030;
@@ -23,7 +23,7 @@ app.get('/test-error', () => {
 });
 
 app.use(notesRouters);
-app.use(authRoutes);
+app.use(authRouters);
 
 app.use(notFoundHandler);
 app.use(errors());
