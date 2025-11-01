@@ -11,6 +11,7 @@ import notesRouters from './routes/notesRoutes.js';
 import { errors } from 'celebrate';
 import authRouters from './routes/authRoutes.js';
 import cookieParser from 'cookie-parser';
+import userRouters from './routes/userRoutes.js';
 const app = express();
 const PORT = process.env.PORT ?? 3030;
 app.use(express.json());
@@ -24,6 +25,7 @@ app.get('/test-error', () => {
 
 app.use(notesRouters);
 app.use(authRouters);
+app.use(userRouters);
 
 app.use(notFoundHandler);
 app.use(errors());
